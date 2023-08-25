@@ -1,4 +1,4 @@
-;;; SE para ayudar en la decisión de una carrera UNIVERSITARIA
+;;; SE para ayudar en la elección de una carrera UNIVERSITARIA
 ;;;
 ;;;
 
