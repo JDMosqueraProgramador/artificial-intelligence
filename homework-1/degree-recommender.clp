@@ -69,7 +69,7 @@
   (humanScience ?humanScience)
   => 
   (if (eq ?humanScience 1) then
-    (bind ?humanScienceValue -10)
+    (bind ?humanScienceValue -5)
     else (bind ?humanScienceValue 0)
   )
   (assert (humanScienceValue ?humanScienceValue))
@@ -79,7 +79,7 @@
   (tecnology ?tecnology)
   => 
   (if (eq ?tecnology 1) then
-    (bind ?tecnologyValue 10)
+    (bind ?tecnologyValue 5)
     else (bind ?tecnologyValue 0)
   )
   (assert (tecnologyValue ?tecnologyValue))
@@ -89,7 +89,7 @@
   (discuss ?discuss)
   => 
   (if (eq ?discuss 1) then
-    (bind ?discussValue -10)
+    (bind ?discussValue -5)
     else (bind ?discussValue 0)
   )
   (assert (discussValue ?discussValue))
@@ -99,7 +99,7 @@
   (mathemathics ?mathemathics)
   => 
   (if (eq ?mathemathics 1) then
-    (bind ?mathemathicsValue 10)
+    (bind ?mathemathicsValue 5)
     else (bind ?mathemathicsValue 0)
   )
   (assert (mathemathicsValue ?mathemathicsValue))
@@ -109,7 +109,7 @@
   (art ?art)
   => 
   (if (eq ?art 1) then
-    (bind ?artValue -10)
+    (bind ?artValue -5)
     else (bind ?artValue 0)
   )
   (assert (artValue ?artValue))
@@ -119,7 +119,7 @@
   (tools ?tools)
   => 
   (if (eq ?tools 1) then
-    (bind ?toolsValue 10)
+    (bind ?toolsValue 5)
     else (bind ?toolsValue 0)
   )
   (assert (toolsValue ?toolsValue))
