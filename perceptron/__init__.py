@@ -1,3 +1,6 @@
+# El siguiente codigo emula el comportamiento 
+# de una compuerta logica OR con cuatro entradas
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -18,12 +21,20 @@ perceptron_or = PerceptronOR(4)
 
 ejemplos_or = np.array([
     [0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1],
     [0, 0, 1, 0, 1],
+    [0, 0, 1, 1, 1],
     [0, 1, 0, 0, 1],
+    [0, 1, 0, 1, 1],
     [0, 1, 1, 0, 1],
+    [0, 1, 1, 1, 1],
     [1, 0, 0, 0, 1],
+    [1, 0, 0, 1, 1],
+    [1, 0, 1, 0, 1],
     [1, 0, 1, 1, 1],
+    [1, 1, 0, 0, 1],
     [1, 1, 0, 1, 1],
+    [1, 1, 1, 0, 1],
     [1, 1, 1, 1, 1]
 ])
 
@@ -50,3 +61,16 @@ plt.show()
 
 
 print("Pesos finales:", perceptron_or.pesos)
+
+# A continuación podemos ver qué de acuerdo con el funcionamiento
+# de la compuerta OR siempre que haya siquiera un 1 entre las entradas la salida será 1
+# y la salida sera cero solo si todas las entradas son cero
+
+perceptron_or.propagacion([1,0,1,1])
+print("Salida:", perceptron_or.salida)
+
+perceptron_or.propagacion([0,0,0,0])
+print("Salida:", perceptron_or.salida)
+
+perceptron_or.propagacion([0,0,0,1])
+print("Salida:", perceptron_or.salida)
