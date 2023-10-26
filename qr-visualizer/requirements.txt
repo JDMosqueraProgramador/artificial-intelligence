@@ -1,0 +1,7 @@
+mypy==1.6.1
+mypy-extensions==1.0.0
+numpy==1.26.1
+opencv-python==4.8.1.78
+pyzbar==0.1.9
+tomli==2.0.1
+typing_extensions==4.8.0
