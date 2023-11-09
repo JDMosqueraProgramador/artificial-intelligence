@@ -1,7 +1,7 @@
-from modules.inventory.ports.products_repository_port import IProductsRepository, Product
+from modules.inventory.ports.products_repository_port import IProductsRepository
 
 class ProductsRepository(IProductsRepository):
-    products: list = []
+    products = []
     def __init__(self):
         pass
 
@@ -13,7 +13,7 @@ class ProductsRepository(IProductsRepository):
     def get_all(self):
         return self.products
     
-    def update(self, id: str, product: Product):
+    def update(self, id, product):
         for i, current_product in enumerate(self.products):
             if current_product.id == id:
                 current_product.__dict__.update(product.__dict__)
@@ -21,6 +21,6 @@ class ProductsRepository(IProductsRepository):
                 self.products[i] = current_product
                 break
 
-    def create(self, product: Product):
+    def create(self, product):
         self.products.append(product)
         return product

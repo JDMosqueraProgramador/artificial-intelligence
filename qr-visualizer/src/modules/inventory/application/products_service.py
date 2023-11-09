@@ -1,15 +1,15 @@
 
-from modules.inventory.ports.products_repository_port import IProductsRepository, Product
+from modules.inventory.ports.products_repository_port import Product
 from modules.inventory.ports.products_service_port import IProductsService
 
 class ProductsService(IProductsService):
-    def __init__(self, products_repository: IProductsRepository):
+    def __init__(self, products_repository):
         self.products_repository = products_repository
 
     def get_products(self):
         return self.products_repository.get_all()
 
-    def add_product(self, id: str, name: str, price: float, quantity: int = 0):
+    def add_product(self, id, name, price, quantity = 0):
         new_product = Product()        
         new_product.id = id
         new_product.name = name

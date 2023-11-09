@@ -1,9 +1,7 @@
 from modules.camera.infrastructure.adapters.ocv_camera import Camera
-from modules.inventory.ports.products_service_port import IProductsService
-from modules.inventory.ports.products_repository_port import Product
 
 class DroneScanner(Camera):
-    def __init__(self, products_service: IProductsService):
+    def __init__(self, products_service):
         super().__init__()
         self.products_service = products_service
 

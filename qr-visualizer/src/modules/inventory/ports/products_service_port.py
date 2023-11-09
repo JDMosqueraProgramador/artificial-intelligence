@@ -6,7 +6,7 @@ class IProductsService(ABC):
         pass
 
     @abstractmethod
-    def add_product(self, id: str, name: str, price: float, quantity: int = 0):
+    def add_product(self, id, name, price, quantity = 0):
         pass
 
     @abstractmethod

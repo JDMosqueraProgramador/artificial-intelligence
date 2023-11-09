@@ -1,10 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Product:
-    id: str
-    name: str
-    price: float
-    quantity: int
+    pass
 
 class IProductsRepository(ABC):
     @abstractmethod
@@ -12,11 +9,11 @@ class IProductsRepository(ABC):
         pass
 
     @abstractmethod
-    def update(self, id: str, product: Product):
+    def update(self, id, product):
         pass
 
     @abstractmethod
-    def create(self, product: Product):
+    def create(self, product):
         pass
 
     @abstractmethod
