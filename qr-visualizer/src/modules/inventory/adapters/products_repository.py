@@ -1,26 +1,25 @@
+import requests
+import os
 from modules.inventory.ports.products_repository_port import IProductsRepository
 
 class ProductsRepository(IProductsRepository):
-    products = []
     def __init__(self):
+        self.products_url = os.getenv('PRODUCTS_URL') 
         pass
 
-    def  get_by_id(self, id):
-        for product in self.products:
-            if product.id == id:
-                return product
+    async def get_by_id(self, id):
+        results = requests.get(self.products_url + id).json()
+        return results
 
-    def get_all(self):
-        return self.products
+    async def get_all(self):
+        results = requests.get(self.products_url).json()
+        return results
     
-    def update(self, id, product):
-        for i, current_product in enumerate(self.products):
-            if current_product.id == id:
-                current_product.__dict__.update(product.__dict__)
-                print("product name: ", current_product.quantity)
-                self.products[i] = current_product
-                break
+    async def update(self, id, product):
+        print("product id", id, product)
+        results = requests.patch(self.products_url + "stock/" + id, json=product).json()
+        return results
 
-    def create(self, product):
-        self.products.append(product)
-        return product
+    async def create(self, product):
+        results = requests.post(self.products_url, json=product.dict()).json()
+        return results

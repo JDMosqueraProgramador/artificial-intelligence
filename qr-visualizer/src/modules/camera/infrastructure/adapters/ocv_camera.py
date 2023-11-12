@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 from pyzbar.pyzbar import decode
-import time 
 from modules.camera.domain.ports.camera_port import ICamera
+import threading
 
 class Camera(ICamera):
     def __init__(self):
@@ -13,31 +13,48 @@ class Camera(ICamera):
         self.cap = cv2.VideoCapture(0)
         self.cap.set(3, self.width)
         self.cap.set(4, self.height)
+        self.read_cache = []
 
-    def read_camera(self):
+        def set_interval(func, sec):
+            def func_wrapper():
+                set_interval(func, sec)
+                func()
+            t = threading.Timer(sec, func_wrapper)
+            t.start()
+            return t
+        
+        set_interval(self.clear_cache, 10)
+
+    def clear_cache(self):
+        self.read_cache = []
+
+    async def read_camera(self):
         while True:
             _, raw_img = self.cap.read()
-            img, decode_data = self.read_qr(raw_img)
+            img, decode_data = await self.read_qr(raw_img)
             cv2.imshow('img', img)
             cv2.waitKey(1)
 
-    def read_qr(self, img):
+    async def read_qr(self, img):
         img = self.apply_filters(img)
-        decode_data = self.decode_qrs(img)
+        decode_data = await self.decode_qrs(img)
 
         return img, decode_data
 
     def apply_filters(self, img):
-        # img = cv2.medianBlur(img, 25) 
-        # img = cv2.resize(img, (512, 512), interpolation=cv2.INTER_AREA)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         return img
 
-    def decode_qrs(self, img):
+    async def decode_qrs(self, img):
         decode_data = []
         for barcode in decode(img):
             decoded_data = barcode.data.decode('utf-8')
+
+            if decoded_data in self.read_cache:
+                break
+            
+            self.read_cache.append(decoded_data)
             decode_data.append(decoded_data)
 
             self.__print_polyline_in_code(img, barcode.polygon, decoded_data)
