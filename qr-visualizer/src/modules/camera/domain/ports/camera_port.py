@@ -14,5 +14,5 @@ class ICamera(ABC):
         pass
 
     @abstractmethod
-    def decode_qrs(self, img):
+    def decode_qrs(self, img, img_without_filters):
         pass

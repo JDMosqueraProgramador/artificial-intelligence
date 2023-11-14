@@ -5,8 +5,8 @@ class DroneScanner(Camera):
         super().__init__()
         self.products_service = products_service
 
-    async def decode_qrs(self, img):
-        data = await super().decode_qrs(img)
+    async def decode_qrs(self, img, img_without_filters):
+        data = await super().decode_qrs(img, img_without_filters)
         if data.__len__() > 0:
             print(data)
 
